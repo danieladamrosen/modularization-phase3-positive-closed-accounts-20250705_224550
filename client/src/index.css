@@ -1,0 +1,996 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom border width utilities */
+.border-3 {
+  border-width: 3px;
+}
+
+/* Custom border width utilities */
+.border-3 {
+  border-width: 3px;
+}
+
+/* Circle badge utilities */
+.circle-badge {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.circle-badge-blue {
+  @apply circle-badge bg-blue-600 text-white;
+}
+
+.circle-badge-green {
+  @apply circle-badge bg-green-600 text-white;
+}
+
+/* Credit Score Gauge Colors - Main Section Circles */
+.gauge-red {
+  background-color: #dc2626; /* Red section from gauge */
+}
+
+.gauge-orange {
+  background-color: #f97316; /* Orange-500 - unified orange color */
+}
+
+.gauge-green {
+  background-color: #16a34a; /* Green section from gauge */
+}
+
+/* Collapsed box height */
+.collapsed-box-height {
+  min-height: 60px;
+}
+
+/* AI Scan Button - Bolt Icon Animation */
+@keyframes bolt-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-bolt-pulse {
+  animation: bolt-pulse 2s ease-in-out infinite;
+}
+
+
+
+:root {
+  /* CRC Professional Color Scheme */
+  --background: 0 0% 98%; /* Light gray background like CRC dashboard */
+  --foreground: 220 13% 18%;
+  --muted: 220 13% 96%;
+  --muted-foreground: 220 9% 46%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 13% 18%;
+  --card: 0 0% 100%; /* Pure white cards */
+  --card-foreground: 220 13% 18%;
+  --border: 220 13% 91%; /* Subtle borders */
+  --input: 0 0% 100%; /* White input backgrounds */
+  --primary: 225 53% 58%; /* CRC authentic blue #4A69BD */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 220 13% 96%;
+  --secondary-foreground: 220 13% 18%;
+  --accent: 225 53% 58%; /* Match primary for consistency */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 225 53% 58%;
+  --radius: 0.375rem; /* Slightly smaller radius for cleaner look */
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 239 84% 67%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 239 84% 67%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 239 84% 67%;
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 239 84% 67%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 239 84% 67%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .credit-pattern-item {
+    @apply transition-all duration-200 hover:scale-110 cursor-pointer;
+  }
+  
+  /* Warning/Alert containers used across components */
+  .warning-container {
+    @apply flex items-center gap-2 bg-red-50 rounded-md px-3 py-1;
+    border: 2px solid rgb(239, 68, 68); /* border-red-500 equivalent - slightly thinner than selected items */
+  }
+  
+  .warning-container .warning-icon {
+    color: rgb(239, 68, 68); /* exact same color as border */
+  }
+  
+  .warning-container .warning-text {
+    color: rgb(239, 68, 68); /* exact same color as border */
+  }
+  
+  /* Success/Saved state containers */
+  .success-container {
+    @apply border border-green-300 bg-green-50 transition-all duration-300;
+  }
+  
+  /* Common button styles for green actions */
+  .btn-green-outline {
+    @apply border-2 border-green-600 text-green-700 hover:bg-green-50 hover:text-green-700 px-6 py-4 text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200;
+  }
+  
+  /* Common dispute form section styling */
+  .dispute-section {
+    @apply pt-4 mt-2 border-t space-y-4;
+  }
+  
+  /* Common flex layouts used across components */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  
+  /* Common card styling patterns */
+  .card-hover {
+    @apply transition-all duration-300 cursor-pointer hover:shadow-md;
+  }
+  
+  /* Subtle green hover effect for saved sections */
+  .hover-green-subtle {
+    @apply hover:bg-green-100 transition-colors;
+  }
+
+  /* Circle badge classes for numbered steps */
+  .circle-badge {
+    @apply w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  .circle-badge-blue {
+    @apply bg-blue-600;
+  }
+
+  .circle-badge-green {
+    @apply bg-green-600;
+  }
+
+  /* Standard collapsed box styling to match reference image - EXACT HEIGHT */
+  .collapsed-box-height {
+    height: 4.5rem !important;
+    min-height: 4.5rem !important;
+    max-height: 4.5rem !important;
+    padding: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    /* Remove justify-content: center to allow child flex layouts to work */
+  }
+
+  /* Inquiry header specific height without center alignment */
+  .inquiry-header-fixed {
+    height: 4.5rem !important;
+    min-height: 4.5rem !important;
+    max-height: 4.5rem !important;
+    padding: 1rem !important;
+  }
+  
+  /* Common text styling patterns */
+  .text-bureau-transunion {
+    @apply text-cyan-600 font-bold;
+  }
+  
+  .text-bureau-equifax {
+    @apply text-red-600 font-bold;
+  }
+  
+  .text-bureau-experian {
+    @apply text-blue-800 font-bold;
+  }
+  
+  /* Circular numbered badges - ensures perfect circles */
+  .circle-badge {
+    @apply inline-flex items-center justify-center rounded-full text-white text-sm font-black flex-shrink-0;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+  
+  .circle-badge-blue {
+    @apply circle-badge bg-blue-600;
+  }
+  
+  .circle-badge-green {
+    @apply circle-badge bg-green-600;
+  }
+
+  /* Force left alignment for dropdown text in Recent Inquiries */
+  [data-radix-select-trigger] > span {
+    text-align: left !important;
+    justify-content: flex-start !important;
+  }
+
+  .text-left [data-radix-select-trigger] > span {
+    text-align: left !important;
+  }
+  
+  @keyframes rainbow-cycle {
+    0% { border-top-color: #ef4444; } /* red */
+    12% { border-top-color: #f59e0b; } /* red-orange blend */
+    25% { border-top-color: #f97316; } /* orange */
+    37% { border-top-color: #eab308; } /* yellow */
+    50% { border-top-color: #22c55e; } /* green */
+    62% { border-top-color: #06b6d4; } /* cyan */
+    75% { border-top-color: #3b82f6; } /* blue */
+    87% { border-top-color: #8b5cf6; } /* purple */
+    100% { border-top-color: #ef4444; } /* back to red */
+  }
+
+  @keyframes thickness-pulse {
+    0%, 100% { border-width: 2px; }
+    50% { border-width: 4px; }
+  }
+
+  @keyframes rainbow-border {
+    0% { border-color: rgba(239, 68, 68, 0.3); } /* red */
+    12% { border-color: rgba(245, 158, 11, 0.3); } /* red-orange blend */
+    25% { border-color: rgba(249, 115, 22, 0.3); } /* orange */
+    37% { border-color: rgba(234, 179, 8, 0.3); } /* yellow */
+    50% { border-color: rgba(34, 197, 94, 0.3); } /* green */
+    62% { border-color: rgba(6, 182, 212, 0.3); } /* cyan */
+    75% { border-color: rgba(59, 130, 246, 0.3); } /* blue */
+    87% { border-color: rgba(139, 92, 246, 0.3); } /* purple */
+    100% { border-color: rgba(239, 68, 68, 0.3); } /* back to red */
+  }
+
+  @keyframes fadeInBounce {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-10px) scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+
+
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fly-arrow {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fly-arrow {
+    animation: fly-arrow 0.5s ease-out forwards;
+  }
+}
+
+
+
+  .cloudy-normal {
+    opacity: 1;
+    z-index: 10;
+    animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+  }
+
+  .cloudy-winking {
+    opacity: 0;
+    z-index: 15;
+    animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+  }
+
+  /* Option B animations - breathing and winking */
+  .cloudy-simple {
+    opacity: 1;
+    z-index: 10;
+    animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+  }
+
+  .cloudy-simple-winking {
+    opacity: 0;
+    z-index: 15;
+    animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+  }
+
+  @keyframes cloudyGlowBreathe {
+    0% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+    }
+    25% {
+      transform: scale(0.92);
+      filter: drop-shadow(0 0 32px hsl(200, 65%, 60%)) drop-shadow(0 0 56px hsl(200, 50%, 70%)) drop-shadow(0 0 80px hsl(200, 35%, 80%));
+    }
+    50% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(330, 55%, 67%)) drop-shadow(0 0 32px hsl(330, 40%, 77%)) drop-shadow(0 0 48px hsl(330, 25%, 87%));
+    }
+    75% {
+      transform: scale(0.92);
+      filter: drop-shadow(0 0 32px hsl(330, 60%, 62%)) drop-shadow(0 0 56px hsl(330, 45%, 72%)) drop-shadow(0 0 80px hsl(330, 30%, 82%));
+    }
+    100% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+    }
+  }
+
+  @keyframes cloudySimpleBreathe {
+    0% { 
+      transform: scale(0.9);
+    }
+    50% { 
+      transform: scale(0.95);
+    }
+    100% { 
+      transform: scale(0.9);
+    }
+  }
+
+  @keyframes cloudyWinkToggle {
+    0% { opacity: 1; }
+    38% { opacity: 1; }
+    38.1% { opacity: 0; }
+    42% { opacity: 0; }
+    42.1% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes cloudyWinkShow {
+    0% { opacity: 0; }
+    38% { opacity: 0; }
+    38.1% { opacity: 1; }
+    42% { opacity: 1; }
+    42.1% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* Animation delay utilities for loader Option B */
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  
+  .animation-delay-1500 {
+    animation-delay: 1.5s;
+  }
+
+  /* Alternative Orbit Loader */
+  .orbit-loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+
+
+
+
+  @keyframes orbit {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+/* Standard collapsed box height targeting - matches Recent Inquiries */
+.collapsed-box-standard {
+  min-height: 78px;
+  max-height: 80px;
+}
+
+  @keyframes cloudyFloat {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0px) scale(1);
+    }
+    33% {
+      transform: translate(-50%, -50%) translateY(-8px) scale(1.05);
+    }
+    66% {
+      transform: translate(-50%, -50%) translateY(4px) scale(0.95);
+    }
+  }
+
+  /* Growing Rings Loader */
+
+
+  .cloudy-normal {
+    opacity: 1;
+    z-index: 10;
+    animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+  }
+
+  .cloudy-winking {
+    opacity: 0;
+    z-index: 15;
+    animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+  }
+
+  /* Option B animations - breathing and winking */
+  .cloudy-simple {
+    opacity: 1;
+    z-index: 10;
+    animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+  }
+
+  .cloudy-simple-winking {
+    opacity: 0;
+    z-index: 15;
+    animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+  }
+
+
+
+  @keyframes cloudyZoomIn {
+    0% { 
+      transform: scale(0.6);
+      filter: drop-shadow(0 0 15px hsl(200, 55%, 78%)) drop-shadow(0 0 30px hsl(200, 42%, 86%)) drop-shadow(0 0 45px hsl(200, 30%, 93%));
+    }
+    100% { 
+      transform: scale(1);
+      filter: drop-shadow(0 0 25px hsl(200, 55%, 78%)) drop-shadow(0 0 50px hsl(200, 42%, 86%)) drop-shadow(0 0 75px hsl(200, 30%, 93%));
+    }
+  }
+
+  @keyframes cloudyWrapperGlow {
+    0% { 
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+      transform: scale(0.85);
+    }
+    25% {
+      filter: drop-shadow(0 0 32px hsl(200, 65%, 60%)) drop-shadow(0 0 56px hsl(200, 50%, 70%)) drop-shadow(0 0 80px hsl(200, 35%, 80%));
+      transform: scale(0.92);
+    }
+    50% { 
+      filter: drop-shadow(0 0 16px hsl(330, 55%, 67%)) drop-shadow(0 0 32px hsl(330, 40%, 77%)) drop-shadow(0 0 48px hsl(330, 25%, 87%));
+      transform: scale(0.85);
+    }
+    75% {
+      filter: drop-shadow(0 0 32px hsl(330, 60%, 62%)) drop-shadow(0 0 56px hsl(330, 45%, 72%)) drop-shadow(0 0 80px hsl(330, 30%, 82%));
+      transform: scale(0.92);
+    }
+    100% { 
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+      transform: scale(0.85);
+    }
+  }
+
+  @keyframes cloudySimpleBreathe {
+    0% { 
+      transform: scale(0.9);
+    }
+    50% { 
+      transform: scale(0.95);
+    }
+    100% { 
+      transform: scale(0.9);
+    }
+  }
+
+  @keyframes cloudyGlowBreathe {
+    0% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+    }
+    25% {
+      transform: scale(0.92);
+      filter: drop-shadow(0 0 32px hsl(200, 65%, 60%)) drop-shadow(0 0 56px hsl(200, 50%, 70%)) drop-shadow(0 0 80px hsl(200, 35%, 80%));
+    }
+    50% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(330, 55%, 67%)) drop-shadow(0 0 32px hsl(330, 40%, 77%)) drop-shadow(0 0 48px hsl(330, 25%, 87%));
+    }
+    75% {
+      transform: scale(0.92);
+      filter: drop-shadow(0 0 32px hsl(330, 60%, 62%)) drop-shadow(0 0 56px hsl(330, 45%, 72%)) drop-shadow(0 0 80px hsl(330, 30%, 82%));
+    }
+    100% { 
+      transform: scale(0.85);
+      filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+    }
+  }
+
+  @keyframes cloudyOriginalGlow {
+    0% { 
+      filter: drop-shadow(0 0 10px hsl(200, 50%, 75%)) drop-shadow(0 0 20px hsl(200, 35%, 85%));
+      transform: scale(0.9);
+    }
+    50% { 
+      filter: drop-shadow(0 0 15px hsl(200, 55%, 70%)) drop-shadow(0 0 30px hsl(200, 40%, 80%));
+      transform: scale(0.95);
+    }
+    100% { 
+      filter: drop-shadow(0 0 10px hsl(200, 50%, 75%)) drop-shadow(0 0 20px hsl(200, 35%, 85%));
+      transform: scale(0.9);
+    }
+  }
+
+  @keyframes cloudyWinkToggle {
+    0% { opacity: 1; }
+    38% { opacity: 1; }
+    38.1% { opacity: 0; }
+    42% { opacity: 0; }
+    42.1% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes cloudyWinkShow {
+    0% { opacity: 0; }
+    38% { opacity: 0; }
+    38.1% { opacity: 1; }
+    42% { opacity: 1; }
+    42.1% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes cloudySpin {
+    0% { 
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+    50% { 
+      transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+    }
+    100% { 
+      transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    }
+  }
+
+  @keyframes cloudyGentleBreathe {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  /* Animation delay utilities for loader Option B */
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  
+  .animation-delay-1500 {
+    animation-delay: 1.5s;
+  }
+
+  /* Cloudy floating animation */
+  @keyframes cloudy-float {
+    0%, 100% {
+      transform: translateY(-4px) scale(1);
+      filter: drop-shadow(0 0 16px rgba(223, 43, 99, 0.5));
+    }
+    50% {
+      transform: translateY(-8px) scale(1.05);
+      filter: drop-shadow(0 0 20px rgba(0, 51, 154, 0.5));
+    }
+  }
+
+  .cloudy-floating {
+    animation: cloudy-float 2s ease-in-out infinite;
+  }
+
+  .cloudy-floating-winking {
+    animation: cloudy-float 2s ease-in-out infinite, winking 3s ease-in-out infinite 1s;
+  }
+
+  @keyframes winking {
+    0%, 85%, 100% {
+      opacity: 1;
+    }
+    90%, 95% {
+      opacity: 0;
+    }
+  }
+
+  .cloudy-simple {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .cloudy-simple-winking {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    animation: simple-winking 3s ease-in-out infinite 1s;
+  }
+
+  @keyframes simple-winking {
+    0%, 85%, 100% {
+      opacity: 0;
+    }
+    90%, 95% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInStill {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fly-arrow {
+    0% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(calc(100vw - 240px));
+      opacity: 1;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(200%);
+    }
+  }
+
+  /* Fast ripple animation for cloudy loader */
+  @keyframes cloudyRipple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  .cloudy-ripple {
+    animation: cloudyRipple 1s ease-out infinite;
+  }
+
+  .cloudy-ripple-delay-1 {
+    animation: cloudyRipple 1s ease-out infinite;
+    animation-delay: 0.2s;
+  }
+
+  .cloudy-ripple-delay-2 {
+    animation: cloudyRipple 1s ease-out infinite;
+    animation-delay: 0.4s;
+  }
+
+  .cloudy-ripple-delay-3 {
+    animation: cloudyRipple 1s ease-out infinite;
+    animation-delay: 0.6s;
+  }
+
+  @keyframes magicalGlow {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-fly-arrow {
+    animation: fly-arrow 1.5s ease-out forwards;
+  }
+  
+  .custom-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #9ca3af;
+    border-radius: 3px;
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .custom-checkbox:hover {
+    border-color: #2563eb;
+  }
+  
+  .custom-checkbox:checked {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+  }
+  
+  .custom-checkbox:checked::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  /* Mobile textarea resize handle */
+  @media (max-width: 768px) {
+    .mobile-resizable {
+      resize: vertical;
+      min-height: 60px;
+      position: relative;
+    }
+    
+    .mobile-resizable::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(-45deg, transparent 30%, #9ca3af 30%, #9ca3af 35%, transparent 35%, transparent 65%, #9ca3af 65%, #9ca3af 70%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    .mobile-resizable:focus::after {
+      opacity: 0.8;
+    }
+  }
+
+/* Force connected account styling - only for non-negative accounts and non-saved accounts */
+.connected-first-account:not(.bg-rose-50):not(.bg-red-50):not(.bg-green-50) {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top: none !important;
+  border-bottom-left-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+}
+
+/* Override Card component default styles for connected accounts - only for non-negative accounts and non-saved accounts */
+.connected-first-account:not(.bg-rose-50):not(.bg-red-50):not(.bg-green-50) > div {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* AI Button Icon Animations */
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  25% { 
+    transform: rotate(90deg) scale(1.05);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+  75% { 
+    transform: rotate(270deg) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.hover-green-subtle:hover {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Force Personal Information header hover to work */
+[data-section="personal-info"] .hover-green-subtle:hover {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Subtle pink hover effect for selected items */
+.hover\:bg-red-75:hover {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+.card-header-hover-green:hover {
+  background-color: rgba(34, 197, 94, 0.15) !important;
+}
+
+.hover-green-match:hover {
+  background-color: rgb(240, 253, 244); /* bg-green-50 but slightly darker on hover */
+}
+
+/* Cloudy Loader Animations - Original June 22 Backup */
+.cloudy-normal {
+  opacity: 1;
+  z-index: 10;
+  animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+}
+
+.cloudy-winking {
+  opacity: 0;
+  z-index: 15;
+  animation: cloudyGlowBreathe 6s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+}
+
+.cloudy-simple {
+  opacity: 1;
+  z-index: 10;
+  animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkToggle 4s step-start 0s infinite;
+}
+
+.cloudy-simple-winking {
+  opacity: 0;
+  z-index: 15;
+  animation: cloudySimpleBreathe 4s ease-in-out 1s infinite, cloudyWinkShow 4s step-start 0s infinite;
+}
+
+/* Fast Ripple Animation */
+.animate-ripple-fast {
+  animation: ripplePing 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes ripplePing {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Animation Delay Overrides */
+.animation-delay-500 { animation-delay: 0.5s !important; }
+.animation-delay-1000 { animation-delay: 1s !important; }
+.animation-delay-1500 { animation-delay: 1.5s !important; }
+
+@keyframes cloudyGlowBreathe {
+  0% { 
+    transform: scale(0.85);
+    filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+  }
+  50% { 
+    transform: scale(0.92);
+    filter: drop-shadow(0 0 32px hsl(200, 65%, 60%)) drop-shadow(0 0 56px hsl(200, 50%, 70%)) drop-shadow(0 0 80px hsl(200, 35%, 80%));
+  }
+  100% { 
+    transform: scale(0.85);
+    filter: drop-shadow(0 0 16px hsl(200, 60%, 65%)) drop-shadow(0 0 32px hsl(200, 45%, 75%)) drop-shadow(0 0 48px hsl(200, 30%, 85%));
+  }
+}
+
+@keyframes cloudySimpleBreathe {
+  0% { 
+    transform: scale(0.9);
+  }
+  50% { 
+    transform: scale(0.95);
+  }
+  100% { 
+    transform: scale(0.9);
+  }
+}
+
+@keyframes cloudyWinkToggle {
+  0% { opacity: 1; }
+  38% { opacity: 1; }
+  38.1% { opacity: 0; }
+  42% { opacity: 0; }
+  42.1% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes cloudyWinkShow {
+  0% { opacity: 0; }
+  38% { opacity: 0; }
+  38.1% { opacity: 1; }
+  42% { opacity: 1; }
+  42.1% { opacity: 0; }
+  100% { opacity: 0; }
+}
